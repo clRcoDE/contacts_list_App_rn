@@ -1,0 +1,3 @@
+rootProject.name = 'contactsList'
+
+include ':app'
