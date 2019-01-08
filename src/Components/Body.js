@@ -14,35 +14,60 @@ import {
 const deviceWidth = Dimensions.get("window").width;
 
 export default class Body extends Component {
+    state = {
+        seed: 1,
+        page: 1,
+        users: [],
+        isLoading: false,
+        isRefreshing: false,
+    };
 
-    constructor(props){
 
-        super(props);
-        this.state={
-            datasource:[]
-        }
-    }
-    componentDidMount(){
-        
-        fetch("https://randomuser.me/api/?results=15")
-        .then(response => response.json())
-        .then(data => {
-        //   let profileEmail = data.results.email;
-        //   Alert.alert("fetch response is", profileEmail);
-        this.setState ({ datasource: data.results})
-        })
-        .catch(error => Alert.alert("oops no connection"));
+    loadUsers = () => {
+        const { users, seed, page } = this.state;
+        this.setState({ isLoading: true });
+    
+        fetch(`https://randomuser.me/api/?seed=${seed}&page=${page}&results=10`)
+          .then(res => res.json())
+          .then(res => {
+            this.setState({
+              users: page === 1 ? res.results : [...users, ...res.results],
+              isRefreshing: false,
+            });
+          })
+          .catch(err => {
+            console.error(err);
+          });
+    };
+    
+  handleRefresh = () => {
+    this.setState({
+      seed: this.state.seed + 1,
+      isRefreshing: true,
+    }, () => {
+      this.loadUsers();
+    });
+  };
 
-    }
-//   fetchRandomUser = () => {
-//     fetch("https://randomuser.me/api/")
-//       .then(response => response.json())
-//       .then(data => {
-//         let profileEmail = data.results[0].email;
-//         Alert.alert("fetch response is", profileEmail);
-//       })
-//       .catch(error => Alert.alert("oops no connection"));
-//   };
+  handleLoadMore = () => {
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      this.loadUsers();
+    });
+  };
+
+  componentDidMount() {
+    this.loadUsers();
+};
+  //     fetch("https://randomuser.me/api/")
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         let profileEmail = data.results[0].email;
+  //         Alert.alert("fetch response is", profileEmail);
+  //       })
+  //       .catch(error => Alert.alert("oops no connection"));
+  //   };
   flatlistHeaderComponent = () => {
     return (
       <View style={styles.flatlistHeaderStyle}>
@@ -71,32 +96,42 @@ export default class Body extends Component {
     );
   };
 
+
+
+
   render() {
     return (
       <View style={styles.bodyContainer}>
         <View style={styles.flatlistWrapper}>
           <FlatList
-            data={this.state.datasource}
+            data={this.state.users}
             ItemSeparatorComponent={this.flatlistSeperator}
             ListHeaderComponent={this.flatlistHeaderComponent}
-            keyExtractor={item => item.phone}
+            keyExtractor={item => item.email}
+            
             renderItem={({ item }) => {
               return (
                 // <View><Text>{item.phone}</Text></View>
                 <View style={styles.contactsCard}>
                   <View style={styles.cardPhotoWrapper}>
                     <Image
-                      source={require('../Assets/Images/5.png')}
+                      source={{ uri: item.picture.medium }}
                       style={styles.thumbnailStyles}
                     />
                   </View>
                   <View style={styles.contactInfo}>
-                    <Text style={styles.nameStyler}>{item.name.first}</Text>
-                    <Text style={styles.lastStyler}>{item.name.last}</Text>
+                    <Text style={styles.nameStyler}>
+                      {item.name.first} , {item.name.last}
+                    </Text>
+                    <Text style={styles.lastStyler}>+{item.phone}</Text>
                   </View>
                 </View>
               );
             }}
+            refreshing={false}
+            onRefresh={this.handleRefresh}
+            onEndReached={this.handleLoadMore}
+            onEndThreshold={15}
           />
         </View>
       </View>
@@ -150,7 +185,7 @@ const styles = StyleSheet.create({
   contactInfo: {
     // flex: 1,
     borderColor: "purple",
-    borderWidth: 2,
+    // borderWidth: 2,
     marginRight: 25
   },
   nameStyler: {
