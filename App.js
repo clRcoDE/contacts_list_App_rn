@@ -11,6 +11,9 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import Header from './src/Components/Header';
 import Body from './src/Components/Body';
 import CounterandColor from './src/Components/CounterandColor'
+import StateTraining from './src/Components/StateTraining'
+
+
 
 export default class App extends Component {
   render() {
@@ -19,6 +22,7 @@ export default class App extends Component {
         <Header/>
         <Body/>
         {/* <CounterandColor/> */}
+        {/* <StateTraining/> */}
       </View>
     );
   }

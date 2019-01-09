@@ -14,53 +14,46 @@ import {
 const deviceWidth = Dimensions.get("window").width;
 
 export default class Body extends Component {
-    state = {
-        seed: 1,
-        page: 1,
-        users: [],
-        isLoading: false,
-        isRefreshing: false,
+
+
+
+  constructor(props){
+    super(props);
+    this.state={
+filteredData: [],
     };
+  let data =[];
+
+  }
+
+componentDidMount(){
+
+  fetch('https://randomuser.me/api/?results=15')
+  .then(res => res.json())
+  .then(data=> {
+this.data = data.results;
+this.setState({
+  filteredData:this.data
+})
+
+  })
+  .catch( error => alert('cannot find server'))
 
 
-    loadUsers = () => {
-        const { users, seed, page } = this.state;
-        this.setState({ isLoading: true });
-    
-        fetch(`https://randomuser.me/api/?seed=${seed}&page=${page}&results=10`)
-          .then(res => res.json())
-          .then(res => {
-            this.setState({
-              users: page === 1 ? res.results : [...users, ...res.results],
-              isRefreshing: false,
-            });
-          })
-          .catch(err => {
-            console.error(err);
-          });
-    };
-    
-  handleRefresh = () => {
-    this.setState({
-      seed: this.state.seed + 1,
-      isRefreshing: true,
-    }, () => {
-      this.loadUsers();
-    });
-  };
 
-  handleLoadMore = () => {
-    this.setState({
-      page: this.state.page + 1
-    }, () => {
-      this.loadUsers();
-    });
-  };
+}
 
-  componentDidMount() {
-    this.loadUsers();
-};
-  //     fetch("https://randomuser.me/api/")
+
+
+serachfilterfunction = text => {
+  let result = this.data.filter(contact => `${contact.name.first} ${contact.name.last}`.contains(text));
+  this.setState( {
+
+    filteredData: result
+  })
+}
+
+    // fetch("https://randomuser.me/api/")
   //       .then(response => response.json())
   //       .then(data => {
   //         let profileEmail = data.results[0].email;
@@ -68,6 +61,8 @@ export default class Body extends Component {
   //       })
   //       .catch(error => Alert.alert("oops no connection"));
   //   };
+
+
   flatlistHeaderComponent = () => {
     return (
       <View style={styles.flatlistHeaderStyle}>
@@ -77,7 +72,8 @@ export default class Body extends Component {
             style={styles.searchBox}
             placeholder={"Search by names and numbers"}
             editable={true}
-            maxLength={24}
+            maxLength={40}
+            onChangeText={(this.serachfilterfunction)}
           />
         </View>
         <Text style={{ marginHorizontal: 20, marginTop: 14, color: "#aaa" }}>
@@ -104,7 +100,7 @@ export default class Body extends Component {
       <View style={styles.bodyContainer}>
         <View style={styles.flatlistWrapper}>
           <FlatList
-            data={this.state.users}
+            data={this.state.filteredData}
             ItemSeparatorComponent={this.flatlistSeperator}
             ListHeaderComponent={this.flatlistHeaderComponent}
             keyExtractor={item => item.email}
@@ -212,6 +208,6 @@ const styles = StyleSheet.create({
   seperatorStyle: {
     height: 2,
     backgroundColor: "#eee",
-    width: deviceWidth * (85 / 100)
+    width: deviceWidth * (90 / 100)
   }
 });
