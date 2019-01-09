@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 
 import ContactsData from "./ContactsData";
 
+
 export default class Header extends Component {
   render() {
     return (
@@ -18,7 +19,7 @@ export default class Header extends Component {
         </View>
         <View style={styles.statusWrapper}>
           <Text style={styles.routeHeader}>Your friends</Text>
-          <Text style={styles.contactsCount}> 285 Available </Text>
+          <Text style={styles.contactsCount}>275 Available </Text>
         </View>
       </View>
     );
@@ -26,7 +27,7 @@ export default class Header extends Component {
 }
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 2,
+    height:125,
     // backgroundColor: "purple"
   },
   navigationWrapper: {
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "lightblue",
     marginHorizontal: 8,
-    paddingHorizontal:14
+    paddingHorizontal:14,
+    justifyContent: 'center',
   },
   routeHeader: {
     fontSize: 25,
@@ -51,7 +53,10 @@ const styles = StyleSheet.create({
   },
   contactsCount: {
     fontSize: 14,
-    color: "#777"
+    color: "#666",
+    // borderWidth:5,
+    backgroundColor:'rgba(255,255,255,.5)',
+    height:20
   },
   profilePhotoWrapper: {
     // borderWidth: 3,
