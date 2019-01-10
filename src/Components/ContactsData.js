@@ -1,178 +1,160 @@
-export default ContactsData = {
+// export default ContactsData = {
 
-    results: [
+//     results: [
 
-        {
-            picture: {
+//         {
+//             picture: {
 
-                thumbnail:require('../Assets/Images/1.png')
-            },
-            name: {
+//                 thumbnail:require('../Assets/Images/1.png')
+//             },
+//             name: {
 
-                first: 'aaaa ',
-                last: 'AAAA'
-            },
+//                 first: 'aaaa ',
+//                 last: 'AAAA'
+//             },
 
-            phone: 1111,
+//             phone: 1111,
 
-            registered: {
-                age: 11
-            }
-
-
-
-
-        },
-        {
-            picture: {
-
-                thumbnail: require('../Assets/Images/2.png')
-            },
-            name: {
-
-                first: 'bbbb',
-                last: 'BBBB'
-            },
-            phone: 2222,
-            registered: {
-                age: 11
-            }
+//             registered: {
+//                 age: 11
+//             }
 
 
 
 
-        },
-        {
-            picture: {
+//         },
+//         {
+//             picture: {
 
-                thumbnail: require('../Assets/Images/3.png')
-            },
-            name: {
+//                 thumbnail: require('../Assets/Images/2.png')
+//             },
+//             name: {
 
-                first: 'cccc',
-                last: 'CCCC'
-            },
-            phone: 3333,
-            registered: {
-                age: 11
-            }
-
-
-
-
-        },
-        {
-            picture: {
-
-                thumbnail: require('../Assets/Images/4.png')
-            },
-            name: {
-
-                first: 'dddd',
-                last: 'DDDD'
-            },
-            phone: 4444,
-            registered: {
-                age: 11
-            }
+//                 first: 'bbbb',
+//                 last: 'BBBB'
+//             },
+//             phone: 2222,
+//             registered: {
+//                 age: 11
+//             }
 
 
 
 
-        },
-        {
-            picture: {
+//         },
+//         {
+//             picture: {
 
-                thumbnail: require('../Assets/Images/5.png')
-            },
-            name: {
+//                 thumbnail: require('../Assets/Images/3.png')
+//             },
+//             name: {
 
-                first: 'eeee',
-                last: 'EEEE'
-            },
-            phone: 5555,
-            registered: {
-                age: 11
-            }
-
-
-
-
-        },
-        {
-            picture: {
-
-                thumbnail: require('../Assets/Images/6.png')
-            },
-            name: {
-
-                first: 'ffff',
-                last: 'FFFF'
-            },
-            phone: 6666,
-            registered: {
-                age: 11
-            }
+//                 first: 'cccc',
+//                 last: 'CCCC'
+//             },
+//             phone: 3333,
+//             registered: {
+//                 age: 11
+//             }
 
 
 
 
-        },
-        {
-            picture: {
+//         },
+//         {
+//             picture: {
 
-                thumbnail: require('../Assets/Images/7.png')
-            },
-            name: {
+//                 thumbnail: require('../Assets/Images/4.png')
+//             },
+//             name: {
 
-                first: 'gggg',
-                last: 'GGGG'
-            },
-            phone: 7777,
-            registered: {
-                age: 11
-            }
-
-
-
-
-        },
-        {
-            picture: {
-
-                thumbnail: require('../Assets/Images/8.png')
-            },
-            name: {
-
-                first: 'hhhh',
-                last: 'HHHH'
-            },
-            phone: 8888,
-            registered: {
-                age: 11
-            }
+//                 first: 'dddd',
+//                 last: 'DDDD'
+//             },
+//             phone: 4444,
+//             registered: {
+//                 age: 11
+//             }
 
 
 
 
-        },
+//         },
+//         {
+//             picture: {
+
+//                 thumbnail: require('../Assets/Images/5.png')
+//             },
+//             name: {
+
+//                 first: 'eeee',
+//                 last: 'EEEE'
+//             },
+//             phone: 5555,
+//             registered: {
+//                 age: 11
+//             }
 
 
 
-    ]
+
+//         },
+//         {
+//             picture: {
+
+//                 thumbnail: require('../Assets/Images/6.png')
+//             },
+//             name: {
+
+//                 first: 'ffff',
+//                 last: 'FFFF'
+//             },
+//             phone: 6666,
+//             registered: {
+//                 age: 11
+//             }
 
 
-}
 
 
-// export default contactdata = [
+//         },
+//         {
+//             picture: {
 
-//     { phone:1},
-//     { phone:2},
-//     { phone:3},
-//     { phone:4},
-//     { phone:5},
-//     { phone:6},
+//                 thumbnail: require('../Assets/Images/7.png')
+//             },
+//             name: {
+
+//                 first: 'gggg',
+//                 last: 'GGGG'
+//             },
+//             phone: 7777,
+//             registered: {
+//                 age: 11
+//             }
 
 
-// ]
+
+
+//         },
+        
+
+
+
+//     ]
+
+
+// }
+
+
+// // export default contactdata = [
+
+// //     { phone:1},
+// //     { phone:2},
+// //     { phone:3},
+// //     { phone:4},
+// //     { phone:5},
+// //     { phone:6},
+
+
+// // ]
