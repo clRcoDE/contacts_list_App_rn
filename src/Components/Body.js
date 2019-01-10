@@ -36,7 +36,7 @@ export default class Body extends Component {
     let { seed } = this.state;
     // this.setState({ isLoading: true });
 
-    fetch(`https://randomuser.me/api/?seed=${seed}&results=20`)
+    fetch(`https://randomuser.me/api/?results=20`)
       .then(res => res.json())
       .then(resdata => {
         this.data = resdata.results;
@@ -194,14 +194,13 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   contactsCardSelected: {
-    height: 75,
+    height: 74,
     color: "#444",
     borderColor:'#2aa0f9',
     borderWidth:3,
     flexDirection: "row",
     alignItems: "center",
     borderRadius:8,
-    padding: 3,
   },
   cardPhotoWrapper: {
     width: 60,
