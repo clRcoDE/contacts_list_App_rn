@@ -80,7 +80,7 @@ export default class Body extends Component {
       (prev, props) => ({
         seed: prev.seed + 1,
         page: prev.page > 1 ? 1 : prev.page,
-        isLoading: true
+        isLoading: false
       }),
       () => {
         // console.warn(this.state.seed);
@@ -89,16 +89,16 @@ export default class Body extends Component {
     );
   };
 
-  // handleInfiniti = () => {
-  //   // this.setState((prev,props)=>({page:prev.page+1,isLoading:true}, ()=>{this.loadUsers();}))
+  handleInfiniti = () => {
+    // this.setState((prev,props)=>({page:prev.page+1,isLoading:true}, ()=>{this.loadUsers();}))
 
-  //   this.setState(
-  //     (prev, props) => ({ page: prev.page + 1, isLoading: true }),
-  //     () => {
-  //       this.loadUsers();
-  //     }
-  //   );
-  // };
+    this.setState(
+      (prev, props) => ({ page: prev.page + 1, isLoading: true }),
+      () => {
+        this.loadUsers();
+      }
+    );
+  };
 
   serachfilterfunction = text => {
     // let y = `${this.state.data[0].name.first.toUpperCase()} ${this.state.data[0].name.last.toUpperCase()}`;
@@ -139,9 +139,23 @@ export default class Body extends Component {
     );
   };
 
-  // flatlistFooterComponent = () => {
-  //   return <View style={styles.flatlistfooterStyles} />;
-  // };
+  flatlistFooterComponent = () => {
+      return ( 
+      <View style={styles.flatlistfooterStyles}> 
+      
+      <ActivityIndicator
+      size="large"
+      color="dodgerblue"
+      // animating={this.state.isLoading}
+      animating={true}
+    />
+
+
+    </View>
+    );
+    
+    // <View style={styles.flatlistfooterStyles} />;
+  };
 
   flatlistSeperator = () => {
     return (
@@ -160,7 +174,7 @@ export default class Body extends Component {
             data={this.state.filteredData}
             ItemSeparatorComponent={this.flatlistSeperator}
             ListHeaderComponent={this.flatlistHeaderComponent}
-            // ListFooterComponent={this.flatlistFooterComponent}
+            ListFooterComponent={this.flatlistFooterComponent}
             keyExtractor={item => item.email}
             extraData={this.state.selectedContact}
             renderItem={({ item }) => {
@@ -218,8 +232,8 @@ export default class Body extends Component {
             onRefresh={this.handleRefresh}
 
 
-            // onEndReached={this.handleInfiniti}
-            // onEndReachedThreshold={1}
+            onEndReached={this.handleInfiniti}
+            onEndReachedThreshold={1}
 
 
             // refreshing={false}
