@@ -25,7 +25,8 @@ export default class Body extends Component {
     filteredData: [],
     isLoading: true,
     isRefreshing: false,
-    selectedContact: null
+    selectedContact: null,
+    isSearching : false,
     };
   }
 
@@ -64,7 +65,7 @@ export default class Body extends Component {
 
             // data:res.results,
             isRefreshing: false,
-            isLoading: false
+            isLoading: true
           },
           () => {
             this.setState({ filteredData: this.state.data });
@@ -103,10 +104,46 @@ export default class Body extends Component {
   serachfilterfunction = text => {
     // let y = `${this.state.data[0].name.first.toUpperCase()} ${this.state.data[0].name.last.toUpperCase()}`;
     // let u= y.includes(text);
+    
+    // this.setState(
+    //   { isSearching:false },
+    //   () => {
+    //     let result = this.state.data.filter(contact =>`${contact.name.first.toUpperCase()} ${contact.name.last.toUpperCase()}`.includes(text.toUpperCase()));
+    //     this.setState({
+    //       filteredData: result,
+    //       isSearching:true,
+    //       // isLoading:false
+    //     });
+    //   }
+    // );
+    // }
+
+    // this.setState({isSearching:false})
+
+    
     let result = this.state.data.filter(contact =>`${contact.name.first.toUpperCase()} ${contact.name.last.toUpperCase()}`.includes(text.toUpperCase()));
-    this.setState({
-      filteredData: result
+    
+    // this.setState(prev=>({isText:text}),()=>{ 
+
+      // console.warn(text);
+      if(text===''){
+      this.setState({
+        isSearching:false
+      })
+
+      }else{
+      this.setState({
+      filteredData: result,
+      isSearching:true,
+      isLoading:false
     });
+  
+  }
+  // })
+    
+    
+   
+  
   };
 
   // fetch("https://randomuser.me/api/")
@@ -118,6 +155,12 @@ export default class Body extends Component {
   //       .catch(error => Alert.alert("oops no connection"));
   //   };
 
+
+  disableIsSearching=()=>{
+this.setState({isSearching:false})
+
+  }
+
   flatlistHeaderComponent = () => {
     return (
       <View style={styles.flatlistHeaderStyle}>
@@ -128,7 +171,9 @@ export default class Body extends Component {
             placeholder={"Search by names and numbers"}
             editable={true}
             maxLength={40}
-            onChangeText={this.serachfilterfunction.bind(this)}
+            // onChangeText={this.serachfilterfunction.bind(this)}
+            onChangeText={ this.serachfilterfunction.bind(this) }
+            value={this.state.username}
           />
         </View>
         <Text style={{ marginHorizontal: 20, marginTop: 14, color: "#aaa" }}>
@@ -146,8 +191,8 @@ export default class Body extends Component {
       <ActivityIndicator
       size="large"
       color="dodgerblue"
-      // animating={this.state.isLoading}
-      animating={true}
+      animating={this.state.isLoading}
+      // animating={true}
     />
 
 
@@ -231,7 +276,9 @@ export default class Body extends Component {
             refreshing={isRefreshing}
             onRefresh={this.handleRefresh}
 
-            onEndReached={this.handleInfiniti}
+            // onEndReached={ this.handleInfiniti}
+            onEndReached={  this.state.isSearching ? null : this.handleInfiniti}
+
             onEndReachedThreshold={1}
 
 
