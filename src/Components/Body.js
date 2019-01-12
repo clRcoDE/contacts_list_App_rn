@@ -231,7 +231,6 @@ export default class Body extends Component {
             refreshing={isRefreshing}
             onRefresh={this.handleRefresh}
 
-
             onEndReached={this.handleInfiniti}
             onEndReachedThreshold={1}
 
